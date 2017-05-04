@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="petfinder">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="header" type="petfinderHeaderType"/>
+      <xs:element name="lastOffset" type="xs:string" minOccurs="0"/>
+      <xs:choice>
+        <xs:element name="auth" type="petfinderAuthData"/>
+        <xs:element name="pet" type="petfinderPetRecord"/>
+        <xs:element name="petIds" type="petfinderPetIdList"/>
+        <xs:element name="pets" type="petfinderPetRecordList"/>
+        <xs:element name="breeds" type="petfinderBreedList"/>
+        <xs:element name="shelter" type="petfinderShelterRecord"/>
+        <xs:element name="shelters" type="petfinderShelterRecordList"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:complexType name="petfinderHeaderType">
+  <xs:sequence>
+    <xs:element name="version" type="xs:string"/>
+    <xs:element name="timestamp" type="xs:dateTime"/>
+    <xs:element name="status">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="code" type="xs:positiveInteger"/>
+          <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="petfinderAuthData">
+  <xs:sequence>
+    <xs:element name="key" type="xs:string"/>
+    <xs:element name="token" type="xs:string"/>
+    <xs:element name="expires" type="xs:positiveInteger"/>
+    <xs:element name="expiresString" type="xs:dateTime"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="petfinderBreedList">
+  <xs:sequence>
+    <xs:element name="breed" type="xs:string" minOccurs="1"
+                maxOccurs="unbounded"/>
+  </xs:sequence>
+  <xs:attribute name="animal" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="petfinderPetIdList">
+  <xs:sequence>
+    <xs:element name="id" type="petIdType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="petfinderPetRecord">
+  <xs:sequence>
+    <xs:element name="id" type="petIdType"/>
+    <xs:element name="shelterId" type="shelterIdType"/>
+    <xs:element name="shelterPetId" type="xs:string" minOccurs="0"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="animal" type="animalType"/>
+    <xs:element name="breeds" type="petfinderBreedList"/>
+    <xs:element name="mix">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:element>
+    <xs:element name="age" type="petAgeType"/>
+    <xs:element name="sex" type="petGenderType"/>
+    <xs:element name="size" type="petSizeType"/>
+    <xs:element name="options">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="option" type="petOptionType" minOccurs="0"
+                      maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="lastUpdate" type="xs:dateTime"/>
+    <xs:element name="status" type="petStatusType"/>
+    <xs:element name="media">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="photos" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="photo" type="petPhotoType" minOccurs="0"
+                      maxOccurs="15"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="contact" type="petContactType" minOccurs="0"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="petfinderPetRecordList">
+  <xs:sequence>
+    <xs:element name="pet" type="petfinderPetRecord" minOccurs="0"
+                maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="petPhotoType">
+  <xs:simpleContent>
+    <xs:extension base="xs:string">
+      <xs:attribute name="id" type="xs:positiveInteger"/>
+      <xs:attribute name="size">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <!-- large (max 500x500) -->
+            <xs:enumeration value="x"/>
+            <!-- thumbnail (max 50 pixels high) -->
+            <xs:enumeration value="t"/>
+            <!-- petnote (max 300x250) -->
+            <xs:enumeration value="pn"/>
+            <!-- petnote thumbnail (max 60 pixels wide)-->
+            <xs:enumeration value="pnt"/>
+            <!-- featured pet module (max 95 pixels wide) -->
+            <xs:enumeration value="fpm"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="petContactType">
+  <xs:sequence>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="address1" type="xs:string"/>
+    <xs:element name="address2" type="xs:string"/>
+    <xs:element name="state" type="xs:string"/>
+    <xs:element name="zip" type="xs:string"/>
+    <xs:element name="phone" type="xs:string"/>
+    <xs:element name="fax" type="xs:string"/>
+    <xs:element name="email" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="petIdType">
+  <xs:restriction base="xs:positiveInteger"/>
+</xs:simpleType>
+
+<xs:simpleType name="shelterIdType">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="[A-Z]{2}[0-9]+"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="petStatusType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="A"/>
+    <xs:enumeration value="H"/>
+    <xs:enumeration value="P"/>
+    <xs:enumeration value="X"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="petGenderType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="M"/>
+    <xs:enumeration value="F"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="petAgeType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Baby"/>
+    <xs:enumeration value="Young"/>
+    <xs:enumeration value="Adult"/>
+    <xs:enumeration value="Senior"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="petSizeType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="S"/>
+    <xs:enumeration value="M"/>
+    <xs:enumeration value="L"/>
+    <xs:enumeration value="XL"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="animalType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Dog"/>
+    <xs:enumeration value="Cat"/>
+    <xs:enumeration value="Small &amp; Furry"/>
+    <xs:enumeration value="BarnYard"/>
+    <xs:enumeration value="Bird"/>
+    <xs:enumeration value="Horse"/>
+    <xs:enumeration value="Pig"/>
+    <xs:enumeration value="Rabbit"/>
+    <xs:enumeration value="Reptile"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="petOptionType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="specialNeeds"/>
+    <xs:enumeration value="noDogs"/>
+    <xs:enumeration value="noCats"/>
+    <xs:enumeration value="noKids"/>
+    <xs:enumeration value="noClaws"/>
+    <xs:enumeration value="hasShots"/>
+    <!--<xs:enumeration value="housebroken"/>-->
+    <xs:enumeration value="housetrained"/><!-- fix -->
+    <xs:enumeration value="altered"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="petfinderShelterRecord">
+  <xs:sequence>
+    <xs:element name="id" type="shelterIdType"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="address1" type="xs:string"/>
+    <xs:element name="address2" type="xs:string"/>
+    <xs:element name="city" type="xs:string"/>
+    <xs:element name="state" type="xs:string"/>
+    <xs:element name="zip" type="xs:string"/>
+    <xs:element name="country" type="xs:string"/>
+    <xs:element name="latitude" type="xs:decimal"/>
+    <xs:element name="longitude" type="xs:decimal"/>
+    <xs:element name="phone" type="xs:string"/>
+    <xs:element name="fax" type="xs:string"/>
+    <xs:element name="email" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="petfinderShelterRecordList">
+  <xs:sequence>
+    <xs:element name="shelter" type="petfinderShelterRecord" minOccurs="0"
+                maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+</xs:schema>
