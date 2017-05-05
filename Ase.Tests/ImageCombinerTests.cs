@@ -1,5 +1,4 @@
-﻿using Ase.Shared;
-using Ase.Shared.ImageLayout;
+﻿using Ase.Shared.Images;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 using System.IO;
@@ -70,7 +69,7 @@ namespace Ase.Tests
         [TestMethod]
         public void CombinesOneImage()
         {
-            using (Image expectedImage = GetExpectedImage("Ase.Tests.ImageCombiner.one-image-combo.png"))
+            using (Image expectedImage = GetExpectedImage("Ase.Tests.Images.one-image-combo.png"))
             using (Image actualImage = new[] { redImage }
                 .CombineImages(RecursiveShrinkingImageLayout.Generate))
             {
@@ -81,7 +80,7 @@ namespace Ase.Tests
         [TestMethod]
         public void CombinesTwoImages()
         {
-            using (Image expectedImage = GetExpectedImage("Ase.Tests.ImageCombiner.two-image-combo.png"))
+            using (Image expectedImage = GetExpectedImage("Ase.Tests.Images.two-image-combo.png"))
             using (Image actualImage = new[] { redImage, greenImage }
                 .CombineImages(RecursiveShrinkingImageLayout.Generate))
             {
@@ -92,7 +91,7 @@ namespace Ase.Tests
         [TestMethod]
         public void CombinesThreeImages()
         {
-            using (Image expectedImage = GetExpectedImage("Ase.Tests.ImageCombiner.three-image-combo.png"))
+            using (Image expectedImage = GetExpectedImage("Ase.Tests.Images.three-image-combo.png"))
             using (Image actualImage = new[] { redImage, greenImage, blueImage }
                 .CombineImages(RecursiveShrinkingImageLayout.Generate))
             {
@@ -103,7 +102,7 @@ namespace Ase.Tests
         [TestMethod]
         public void CombinesFourImages()
         {
-            using (Image expectedImage = GetExpectedImage("Ase.Tests.ImageCombiner.four-image-combo.png"))
+            using (Image expectedImage = GetExpectedImage("Ase.Tests.Images.four-image-combo.png"))
             using (Image actualImage = new[] { redImage, greenImage, blueImage, grayImage }
                 .CombineImages(RecursiveShrinkingImageLayout.Generate))
             {

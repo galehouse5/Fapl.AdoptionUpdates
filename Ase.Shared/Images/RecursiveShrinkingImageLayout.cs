@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Ase.Shared.ImageLayout
+namespace Ase.Shared.Images
 {
     public static class RecursiveShrinkingImageLayout
     {

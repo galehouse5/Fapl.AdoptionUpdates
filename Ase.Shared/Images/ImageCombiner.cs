@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Ase.Shared
+namespace Ase.Shared.Images
 {
     public delegate IReadOnlyCollection<RectangleF> GenerateImageLayout(IReadOnlyCollection<SizeF> sizes);
 

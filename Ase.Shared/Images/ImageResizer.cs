@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace Ase.Shared
+namespace Ase.Shared.Images
 {
     // Refer to: http://stackoverflow.com/questions/1922040/resize-an-image-c-sharp
     public static class ImageResizer

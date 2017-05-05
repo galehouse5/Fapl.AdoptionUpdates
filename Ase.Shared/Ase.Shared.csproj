@@ -78,9 +78,9 @@
     <Compile Include="AzureStorage\AzureTableStoragePetIDMappingStorageService.cs" />
     <Compile Include="AzureStorage\TableClientHelper.cs" />
     <Compile Include="EmailBuilder.cs" />
-    <Compile Include="ImageCombiner.cs" />
-    <Compile Include="ImageResizer.cs" />
-    <Compile Include="ImageResizerTests.cs" />
+    <Compile Include="Images\ImageDataHelper.cs" />
+    <Compile Include="Images\ImageCombiner.cs" />
+    <Compile Include="Images\ImageResizer.cs" />
     <Compile Include="Petfinder\PetfinderPetImageRetrievalService.cs" />
     <Compile Include="PetIDMapping.cs" />
     <Compile Include="IPetIDMappingStorageService.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="PetPoint\PetPointPetInfo.cs" />
     <Compile Include="PetPoint\PetPointPetInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecursiveShrinkingImageLayout.cs" />
+    <Compile Include="Images\RecursiveShrinkingImageLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

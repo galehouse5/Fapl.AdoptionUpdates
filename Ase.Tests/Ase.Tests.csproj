@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AzureTableStoragePetIDMappingStorageServiceTests.cs" />
     <Compile Include="ImageCombinerTests.cs" />
+    <Compile Include="ImageResizerTests.cs" />
     <Compile Include="PetfinderPetIDMappingRetrivalServiceTests.cs" />
     <Compile Include="PetfinderPetImageRetrievalServiceTests.cs" />
     <Compile Include="PetPointPetInfoServiceTests.cs" />
@@ -72,10 +73,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ImageCombiner\four-image-combo.png" />
-    <EmbeddedResource Include="ImageCombiner\one-image-combo.png" />
-    <EmbeddedResource Include="ImageCombiner\three-image-combo.png" />
-    <EmbeddedResource Include="ImageCombiner\two-image-combo.png" />
+    <EmbeddedResource Include="Images\four-image-combo.png" />
+    <EmbeddedResource Include="Images\one-image-combo.png" />
+    <EmbeddedResource Include="Images\three-image-combo.png" />
+    <EmbeddedResource Include="Images\two-image-combo.png" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

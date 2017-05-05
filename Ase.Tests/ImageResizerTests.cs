@@ -1,7 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Ase.Shared.Images;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 
-namespace Ase.Shared
+namespace Ase.Tests
 {
     [TestClass]
     public class ImageResizerTests
