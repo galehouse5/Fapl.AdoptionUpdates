@@ -75,6 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DailyAdoptionEmail\DailyAdoptionEmailModelFactory.cs" />
+    <Compile Include="DailyAdoptionEmail\DailyAdoptionEmailModel.cs" />
     <Compile Include="AzureStorage\AzureTableStoragePetIDMappingStorageService.cs" />
     <Compile Include="AzureStorage\TableClientHelper.cs" />
     <Compile Include="EmailBuilder.cs" />
@@ -94,6 +96,7 @@
       <DependentUpon>petfinder.xsd</DependentUpon>
     </Compile>
     <Compile Include="Petfinder\PetfinderPetIDMappingRetrievalService.cs" />
+    <Compile Include="PetPoint\PetPointAdoptedPetsService.cs" />
     <Compile Include="PetPoint\PetPointPetInfo.cs" />
     <Compile Include="PetPoint\PetPointPetInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

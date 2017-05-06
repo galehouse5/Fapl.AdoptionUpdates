@@ -13,7 +13,7 @@ namespace Ase.Shared.PetPoint
         public string Name { get; private set; }
         public string ReferenceNumber { get; private set; }
         public string Species { get; private set; }
-        public IReadOnlyCollection<Tuple<string, DateTime>> StageTimestamps { get; private set; }
+        public IReadOnlyCollection<Tuple<string, DateTime>> Stages { get; private set; }
 
         public override string ToString()
             => $"{Name} ({ID})";
@@ -41,7 +41,7 @@ namespace Ase.Shared.PetPoint
                 Name = document.GetElementbyId("cphWorkArea_lblName").InnerText,
                 ReferenceNumber = document.GetElementbyId("cphWorkArea_lblARN").InnerText,
                 Species = document.GetElementbyId("cphWorkArea_lblSpecies").InnerText,
-                StageTimestamps = document.GetElementbyId("cphWorkArea_dgStage")
+                Stages = document.GetElementbyId("cphWorkArea_dgStage")
                     .Elements("tr").Skip(1) // Skip the header row.
                     .Select(r => new Tuple<string, DateTime>(
                         /* Stage */ r.Elements("td").ElementAt(0).InnerText.Trim(),

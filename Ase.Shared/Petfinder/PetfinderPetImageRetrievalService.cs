@@ -48,17 +48,11 @@ namespace Ase.Shared.Petfinder
 
         public void Dispose()
         {
-            if (handler != null)
-            {
-                handler.Dispose();
-                handler = null;
-            }
+            handler?.Dispose();
+            handler = null;
 
-            if (client != null)
-            {
-                client.Dispose();
-                client = null;
-            }
+            client?.Dispose();
+            client = null;
         }
     }
 }

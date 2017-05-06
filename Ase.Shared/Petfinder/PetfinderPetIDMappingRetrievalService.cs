@@ -12,15 +12,15 @@ namespace Ase.Shared.Petfinder
     public class PetfinderPetIDMappingRetrievalService : IPetIDMappingRetrievalService, IDisposable
     {
         private string shelterID;
-        private string key;
+        private string apiKey;
         private HttpClientHandler handler;
         private HttpClient client;
         private XmlSerializer serializer = new XmlSerializer(typeof(petfinder));
 
-        public PetfinderPetIDMappingRetrievalService(string key, string shelterID)
+        public PetfinderPetIDMappingRetrievalService(string apiKey, string shelterID)
         {
             this.shelterID = shelterID;
-            this.key = key;
+            this.apiKey = apiKey;
 
             handler = new HttpClientHandler
             {
@@ -35,7 +35,7 @@ namespace Ase.Shared.Petfinder
         public async Task<IReadOnlyCollection<PetIDMapping>> GetCurrentPetIDMappings()
         {
             using (HttpResponseMessage response = await client.GetAsync(string.Concat("shelter.getPets",
-                $"?key={WebUtility.UrlEncode(key)}",
+                $"?key={WebUtility.UrlEncode(apiKey)}",
                 $"&id={WebUtility.UrlEncode(shelterID)}",
                 // Don't get animals that are on hold, pending adoption, or adopted/removed. We only have access
                 // rights to the adoptable animals for now.
@@ -63,17 +63,11 @@ namespace Ase.Shared.Petfinder
 
         public void Dispose()
         {
-            if (handler != null)
-            {
-                handler.Dispose();
-                handler = null;
-            }
+            handler?.Dispose();
+            handler = null;
 
-            if (client != null)
-            {
-                client.Dispose();
-                client = null;
-            }
+            client?.Dispose();
+            client = null;
         }
     }
 }

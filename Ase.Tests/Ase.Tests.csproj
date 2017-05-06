@@ -54,10 +54,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AzureTableStoragePetIDMappingStorageServiceTests.cs" />
+    <Compile Include="DailyAdoptionEmailTests.cs" />
     <Compile Include="ImageCombinerTests.cs" />
     <Compile Include="ImageResizerTests.cs" />
     <Compile Include="PetfinderPetIDMappingRetrivalServiceTests.cs" />
     <Compile Include="PetfinderPetImageRetrievalServiceTests.cs" />
+    <Compile Include="PetPointAdoptedPetServiceTests.cs" />
     <Compile Include="PetPointPetInfoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

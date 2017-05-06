@@ -12,25 +12,28 @@ namespace Ase.Shared
         string Species { get; }
         string Breed { get; }
         DateTime? Dob { get; }
-        IReadOnlyCollection<Tuple<string, DateTime>> StageTimestamps { get; }
+        IReadOnlyCollection<Tuple<string, DateTime>> Stages { get; }
     }
 
     public static class IPetPointPetInfoExtensions
     {
+        public static IReadOnlyCollection<Tuple<string, DateTime>> GetLastStayStages(this IPetInfo info, DateTime now)
+            => info.Stages
+            .Where(s => s.Item2 <= now)
+            .OrderByDescending(s => s.Item2)
+            .TakeWhile((s, i) => !"Released".Equals(s.Item1, StringComparison.OrdinalIgnoreCase) || i == 0)
+            .ToArray();
+
         public static TimeSpan? GetLastStayLength(this IPetInfo info, DateTime now)
         {
-            DateTime? lastNewArrivalTimestamp = info.StageTimestamps
-                .Where(s => s.Item1.Equals("New Arrival", StringComparison.OrdinalIgnoreCase))
-                .FirstOrDefault()?.Item2;
-            if (!lastNewArrivalTimestamp.HasValue)
-                return null;
+            var stages = info.GetLastStayStages(now)
+                .OrderByDescending(s => s.Item2);
+            if (!stages.Any()) return null;
 
-            DateTime? lastReleasedTimestamp = info.StageTimestamps
-                .Where(s => s.Item1.Equals("Released", StringComparison.OrdinalIgnoreCase))
-                .Where(s => s.Item2 > lastNewArrivalTimestamp)
-                .FirstOrDefault()?.Item2;
+            bool hasEnded = "Released".Equals(stages.First().Item1, StringComparison.OrdinalIgnoreCase);
+            if (!hasEnded) return now - stages.First().Item2;
 
-            return (lastReleasedTimestamp ?? now) - lastNewArrivalTimestamp;
+            return stages.First().Item2 - stages.Last().Item2;
         }
     }
 }
