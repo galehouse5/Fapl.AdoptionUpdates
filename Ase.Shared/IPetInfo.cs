@@ -31,7 +31,7 @@ namespace Ase.Shared
             if (!stages.Any()) return null;
 
             bool hasEnded = "Released".Equals(stages.First().Item1, StringComparison.OrdinalIgnoreCase);
-            if (!hasEnded) return now - stages.First().Item2;
+            if (!hasEnded) return now - stages.Last().Item2;
 
             return stages.First().Item2 - stages.Last().Item2;
         }
