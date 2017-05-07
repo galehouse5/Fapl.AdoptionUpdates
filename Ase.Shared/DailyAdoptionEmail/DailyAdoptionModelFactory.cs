@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Ase.Shared.DailyAdoptionEmail
 {
-    public class DailyAdoptionEmailModelFactory
+    public class DailyAdoptionModelFactory
     {
         private IAdoptedPetsService adoptedPetsService;
         private IPetInfoService petInfoService;
         private IPetIDMappingStorageService petIDMappingService;
 
-        public DailyAdoptionEmailModelFactory(
+        public DailyAdoptionModelFactory(
             IAdoptedPetsService adoptedPetsService,
             IPetInfoService petInfoService,
             IPetIDMappingStorageService petIDMappingService)
@@ -21,7 +21,7 @@ namespace Ase.Shared.DailyAdoptionEmail
             this.petIDMappingService = petIDMappingService;
         }
 
-        public async Task<DailyAdoptionEmailModel> CreateModel(DateTime date)
+        public async Task<DailyAdoptionModel> CreateModel(DateTime date)
         {
             var pets = new List<IPetInfo>();
 
@@ -34,10 +34,10 @@ namespace Ase.Shared.DailyAdoptionEmail
                 .GetMappings(pets.Select(p => p.ReferenceNumber)))
                 .ToDictionary(m => m.PetPointReferenceNumber, m => m.PetfinderID);
 
-            return new DailyAdoptionEmailModel
+            return new DailyAdoptionModel
             {
                 Date = date,
-                Pets = pets.Select(p => new DailyAdoptionEmailModel.Pet
+                Pets = pets.Select(p => new DailyAdoptionModel.Pet
                 {
                     Species = p.Species,
                     Name = p.Name,

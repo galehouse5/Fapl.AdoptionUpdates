@@ -1,0 +1,395 @@
+﻿@using Ase.Shared.DailyAdoptionEmail
+@using RazorEngine.Templating
+@inherits TemplateBase<DailyAdoptionModel>
+
+@{
+    string headerLogoUrl = ViewBag.HeaderLogoUrl;
+    GetPetfinderPhotoUrl getPetfinderPhotoUrl = ViewBag.GetPetfinderPhotoUrl;
+    GetNoPhotoUrl getNoPhotoUrl = ViewBag.GetNoPhotoUrl;
+}
+
+@helper RenderPet(
+    string align,
+    DailyAdoptionModel.Pet pet,
+    GetPetfinderPhotoUrl getPetfinderPhotoUrl,
+    GetNoPhotoUrl getNoPhotoUrl)
+{
+  <table align="@align" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td>
+        <table class="small-section-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="small-section-padding-height" height="20"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table class="profile-2col-size" width="290" height="232" style="box-shadow:1px 1px 2px rgba(0, 0, 0, 0.15);" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="profile-2col-thumb-size" width="290" height="162">
+              @if (pet.PetfinderID.HasValue)
+              {
+                <a href="https://www.petfinder.com/petdetail/@pet.PetfinderID" style="text-decoration:none;" target="_blank">
+                  <img class="profile-2col-thumb-size" src="@getPetfinderPhotoUrl(pet.PetfinderID.Value, 600, 332)" width="290" height="162" border="0" style="display:block;">
+                </a>
+              }
+              else
+              {
+                <span style="text-decoration:none;">
+                  <img class="profile-2col-thumb-size" src="@getNoPhotoUrl(pet.Species, 600, 332)" width="290" height="162" border="0" style="display:block;">
+                </span>
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table class="profile-2col-outer-container-size" width="290" height="70" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF">
+                <tr>
+                  <td class="content-container-padding-width" width="20"></td>
+                  <td>
+                    <table class="profile-2col-inner-container-size" width="250" height="70" valign="top" cellspacing="0" cellpadding="0" border="0" style="table-layout:fixed;overflow:hidden;word-wrap:break-word;text-overflow:ellipsis">
+                      <tr>
+                        <td>
+                          <table class="content-container-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                              <td class="content-container-padding-height" height="20"></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="profile-2col-width" width="250" valign="top">
+                          @if (pet.PetfinderID.HasValue)
+                          {
+                            <a class="profile-link-font-class" href="https://www.petfinder.com/petdetail/@pet.PetfinderID" style="font-family:sans-serif; font-size:12px; font-weight:bold; color:#222222; line-height:15px; letter-spacing:0px; -webkit-text-size-adjust:none; text-decoration:none;">
+                              @pet.Name
+                            </a>
+                          }
+                          else
+                          {
+                            <span class="profile-link-font-class" style="font-family:sans-serif; font-size:12px; font-weight:bold; color:#222222; line-height:15px; letter-spacing:0px; -webkit-text-size-adjust:none; text-decoration:none;">
+                              @pet.Name
+                            </span>
+                          }
+                          <div class="meta-data-font" style="font-family:sans-serif; color:#999999; font-size:12px; letter-spacing:0px; line-height:20px; -webkit-text-size-adjust:none;">
+                            @pet.SummaryText
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table class="content-container-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                              <td class="content-container-padding-height" height="20"></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="content-container-padding-width" width="20"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+}
+
+<html lang="en">
+<head>
+  <title>@Model.Title</title>
+
+  <style type="text/css">
+    * {
+      font-family: sans-serif;
+    }
+
+    @@media only screen and (max-device-width: 480px) {
+      body.suppress-border-on-mobile {
+        margin: 0 !important;
+        border: 0 !important;
+        padding: 0 !important;
+      }
+
+      table.outer-container-width, td.outer-container-width {
+        width: 640px !important;
+      }
+
+      td.outer-container-padding-width {
+        width: 20px !important;
+      }
+
+      table.inner-container-width, td.inner-container-width {
+        width: 600px !important;
+      }
+
+      table.header-container-width {
+        width: 600px !important;
+        height: 100px !important;
+      }
+
+      td.header_left_padding_width {
+        width: 25px !important;
+      }
+
+      td.logo_container_size {
+        width: 575px !important;
+        height: 165px !important;
+      }
+
+      td.footer-font, div.footer-font {
+        font-size: 18px !important;
+        line-height: 24px !important;
+      }
+
+      table.large-section-padding-height, td.large-section-padding-height {
+        height: 30px !important;
+      }
+
+      table.small-section-padding-height, td.small-section-padding-height {
+        height: 20px !important;
+      }
+
+      table.content-container-padding-width, td.content-container-padding-width {
+        width: 30px !important;
+      }
+
+      table.content-container-padding-height, td.content-container-padding-height {
+        height: 30px !important;
+      }
+
+      span.profile-title-font-class, a.profile-link-font-class, div.profile-link-font-class, div.greeting-font, td.greeting-font {
+        font-size: 30px !important;
+        line-height: 36px !important;
+      }
+
+      span.meta-data-font, div.meta-data-font, a.meta-data-font, td.meta-data-font {
+        display: block !important;
+        font-size: 30px !important;
+        line-height: 36px !important;
+      }
+
+      table.profile-2col-size {
+        width: 600px !important;
+        height: 480px !important;
+      }
+
+      table.profile-2col-width, td.profile-2col-width {
+        width: 600px !important;
+      }
+
+      img.profile-2col-thumb-size {
+        width: 600px !important;
+        height: 332px !important;
+      }
+
+      table.profile-2col-outer-container-size, td.profile-2col-outer-container-size {
+        width: 600px !important;
+        height: 148px !important;
+      }
+
+      table.profile-2col-inner-container-size, td.profile-2col-inner-container-size {
+        width: 540px !important;
+        height: 148px !important;
+      }
+    }
+  </style>
+
+  <style type="text/css">
+    * {
+      font-family: sans-serif;
+    }
+
+    @@media only screen and (max-device-width: 480px) {
+      body[class=suppress-border-on-mobile] {
+        margin: 0 !important;
+        border: 0 !important;
+        padding: 0 !important;
+      }
+
+      table[class=outer-container-width], td[class=outer-container-width] {
+        width: 640px !important;
+      }
+
+      td[class=outer-container-padding-width] {
+        width: 20px !important;
+      }
+
+      table[class=inner-container-width], td[class=inner-container-width] {
+        width: 600px !important;
+      }
+
+      table[class=header-container-width] {
+        width: 600px !important;
+        height: 100px !important;
+      }
+
+      td[class=header_left_padding_width] {
+        width: 25px !important;
+      }
+
+      td[class=logo_container_size] {
+        width: 575px !important;
+        height: 165px !important;
+      }
+
+      td[class=footer-font], div[class=footer-font] {
+        font-size: 18px !important;
+        line-height: 24px !important;
+      }
+
+      table[class=large-section-padding-height], td[class=large-section-padding-height] {
+        height: 30px !important;
+      }
+
+      table[class=small-section-padding-height], td[class=small-section-padding-height] {
+        height: 20px !important;
+      }
+
+      table[class=content-container-padding-width], td[class=content-container-padding-width] {
+        width: 30px !important;
+      }
+
+      table[class=content-container-padding-height], td[class=content-container-padding-height] {
+        height: 30px !important;
+      }
+
+      span[class=profile-title-font-class], a[class=profile-link-font-class], div[class=profile-link-font-class], div[class=greeting-font], td[class=greeting-font] {
+        font-size: 30px !important;
+        line-height: 36px !important;
+      }
+
+      span[class=meta-data-font], div[class=meta-data-font], a[class=meta-data-font], td[class=meta-data-font] {
+        display: block !important;
+        font-size: 30px !important;
+        line-height: 36px !important;
+      }
+
+      table[class=profile-2col-size] {
+        width: 600px !important;
+        height: 480px !important;
+      }
+
+      table[class=profile-2col-width], td[class=profile-2col-width] {
+        width: 600px !important;
+      }
+
+      img[class=profile-2col-thumb-size] {
+        width: 600px !important;
+        height: 332px !important;
+      }
+
+      table[class=profile-2col-outer-container-size], td[class=profile-2col-outer-container-size] {
+        width: 600px !important;
+        height: 148px !important;
+      }
+
+      table[class=profile-2col-inner-container-size], td[class=profile-2col-inner-container-size] {
+        width: 540px !important;
+        height: 148px !important;
+      }
+    }
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body class="suppress-border-on-mobile">
+  <span style="display: none !important; visibility: hidden; width: 0; height: 0; opacity: 0; color: transparent;">@Model.PreviewText</span>
+  <table class="outer-container-width" width="680" bgcolor="#f0f0f0" align="center" valign="top" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td class="outer-container-padding-width" width="40"></td>
+      <td class="inner-container-width" width="600">
+        <table class="inner-container-width" width="600" align="center" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td>
+              <table class="header-container-width" width="600" height="125" align="center" valign="center" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="header_left_padding_width" width="16"></td>
+                  <td class="logo_container_size" width="584" height="125" valign="center">
+                    <img class="header_logo_size" width="536" height="95" src="@headerLogoUrl" border="0" style="display:block;">
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr><td style="max-height:0px; font-size:0; display:none;"><hr class="inner-container-width" width="600" style="height:0px; border:none; border-color:#f0f0f0; padding:0px; margin:0px;"></td></tr>
+          <tr><td class="large-section-padding-height" height="30"></td></tr>
+          <tr>
+            <td>
+              <table class="inner-container-width" width="600" align="center" valign="center" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td>
+                    <table class="inner-container-width" width="600" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td class="greeting-font" style="font-family:sans-serif; font-size:20px; line-height:24px; letter-spacing:0px; font-weight:bold; color:#222222; text-decoration:none; -webkit-text-size-adjust:none;">
+                          @Model.GreetingText
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table class="inner-container-width" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#F0F0F0">
+                      <tr>
+                        <td class="inner-container-width" width="600">
+                          <table class="inner-container-width" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#F0F0F0">
+                            @for (var enumerator = Model.OrderedPets.GetEnumerator(); enumerator.MoveNext(); )
+                            {
+                              <tr>
+                                <td class="inner-container-width" width="600" valign="top">
+                                  @RenderPet("left", enumerator.Current, getPetfinderPhotoUrl, getNoPhotoUrl)
+
+                                  @if (!enumerator.MoveNext()) { break; }
+
+                                  @RenderPet("right", enumerator.Current, getPetfinderPhotoUrl, getNoPhotoUrl)
+                                </td>
+                              </tr>
+                            }
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table class="large-section-padding-height" height="30" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="large-section-padding-height" height="30"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table class="inner-container-width" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="footer-font" style="color: #999999; font-size:13px; line-height:15px; font-family:sans-serif; letter-spacing:0px; -webkit-text-size-adjust:none; word-wrap:break-word;">
+                    If you no longer want to receive adoption updates, simply reply to this email and ask to unsubscribe.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="large-section-padding-height" height="30" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td class="large-section-padding-height" height="30"></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class="outer-container-padding-width" width="40"></td>
+    </tr>
+  </table>
+</body>
+</html>

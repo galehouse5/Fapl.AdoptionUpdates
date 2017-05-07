@@ -35,6 +35,10 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
       <Private>True</Private>
@@ -60,11 +64,19 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.9.3.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.9.3\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -75,11 +87,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DailyAdoptionEmail\DailyAdoptionEmailModelFactory.cs" />
-    <Compile Include="DailyAdoptionEmail\DailyAdoptionEmailModel.cs" />
+    <Compile Include="DailyAdoptionEmail\DailyAdoptionModel.cs" />
+    <Compile Include="DailyAdoptionEmail\DailyAdoptionModelFactory.cs" />
     <Compile Include="AzureStorage\AzureTableStoragePetIDMappingStorageService.cs" />
     <Compile Include="AzureStorage\TableClientHelper.cs" />
-    <Compile Include="EmailBuilder.cs" />
+    <Compile Include="DailyAdoptionEmail\DailyAdoptionEmail.cs" />
     <Compile Include="Images\ImageDataHelper.cs" />
     <Compile Include="Images\ImageCombiner.cs" />
     <Compile Include="Images\ImageResizer.cs" />
@@ -103,6 +115,9 @@
     <Compile Include="Images\RecursiveShrinkingImageLayout.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DailyAdoptionEmail\HtmlBody.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Petfinder\petfinder.xsd">
       <SubType>Designer</SubType>

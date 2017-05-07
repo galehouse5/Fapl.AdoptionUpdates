@@ -1,0 +1,274 @@
+﻿{
+  "Date": "2017-05-06T00:00:00",
+  "Pets": [
+    {
+      "Species": "Dog",
+      "Name": "Butch",
+      "PetfinderID": 37990107,
+      "Age": "74.02:03:43.7684842",
+      "Stay": "46.23:01:39"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Tyler",
+      "PetfinderID": 37990050,
+      "Age": "74.02:03:43.7704843",
+      "Stay": "46.23:11:26"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Georgie Girl",
+      "PetfinderID": 38001442,
+      "Age": "221.02:03:43.7704843",
+      "Stay": "7.22:55:34"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Bronx",
+      "PetfinderID": null,
+      "Age": "72.02:03:43.7704843",
+      "Stay": "7.22:57:42"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Alfred",
+      "PetfinderID": 38001927,
+      "Age": "91.02:03:43.7704843",
+      "Stay": "88.00:11:56"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Bess",
+      "PetfinderID": null,
+      "Age": "551.02:03:43.7704843",
+      "Stay": "2.22:44:19"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Little Henry",
+      "PetfinderID": null,
+      "Age": "735.02:03:43.7704843",
+      "Stay": "3.00:43:50"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Timmy",
+      "PetfinderID": 37989915,
+      "Age": "74.02:03:43.7704843",
+      "Stay": "47.00:51:16"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Lucky",
+      "PetfinderID": 37987470,
+      "Age": "3291.02:03:43.7704843",
+      "Stay": "3.01:52:47"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Socks",
+      "PetfinderID": null,
+      "Age": "1098.02:03:43.7704843",
+      "Stay": "23:20:04"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Critter",
+      "PetfinderID": null,
+      "Age": "1463.02:03:43.7704843",
+      "Stay": "23:20:04"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Moana",
+      "PetfinderID": 37936906,
+      "Age": "468.02:03:43.7704843",
+      "Stay": "10.03:24:30"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Maverick",
+      "PetfinderID": 37936126,
+      "Age": "2204.02:03:43.7704843",
+      "Stay": "11.02:38:12"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Timmy",
+      "PetfinderID": null,
+      "Age": "317.02:03:43.7704843",
+      "Stay": "12.00:43:34"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Sonny",
+      "PetfinderID": null,
+      "Age": "1278.02:03:43.7704843",
+      "Stay": "05:11:03"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Karla 7",
+      "PetfinderID": null,
+      "Age": "192.02:03:43.7704843",
+      "Stay": "9.00:55:11"
+    },
+    {
+      "Species": "Cat",
+      "Name": "McFluffin",
+      "PetfinderID": null,
+      "Age": "310.02:03:43.7704843",
+      "Stay": "5.03:35:03"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Celena",
+      "PetfinderID": 38002461,
+      "Age": "91.02:03:43.7704843",
+      "Stay": "88.05:03:40"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Gordon",
+      "PetfinderID": 38002468,
+      "Age": "91.02:03:43.7704843",
+      "Stay": "88.05:05:51"
+    }
+  ],
+  "OrderedPets": [
+    {
+      "Species": "Cat",
+      "Name": "Alfred",
+      "PetfinderID": 38001927,
+      "Age": "91.02:03:43.7704843",
+      "Stay": "88.00:11:56"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Bess",
+      "PetfinderID": null,
+      "Age": "551.02:03:43.7704843",
+      "Stay": "2.22:44:19"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Bronx",
+      "PetfinderID": null,
+      "Age": "72.02:03:43.7704843",
+      "Stay": "7.22:57:42"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Butch",
+      "PetfinderID": 37990107,
+      "Age": "74.02:03:43.7684842",
+      "Stay": "46.23:01:39"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Celena",
+      "PetfinderID": 38002461,
+      "Age": "91.02:03:43.7704843",
+      "Stay": "88.05:03:40"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Critter",
+      "PetfinderID": null,
+      "Age": "1463.02:03:43.7704843",
+      "Stay": "23:20:04"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Georgie Girl",
+      "PetfinderID": 38001442,
+      "Age": "221.02:03:43.7704843",
+      "Stay": "7.22:55:34"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Gordon",
+      "PetfinderID": 38002468,
+      "Age": "91.02:03:43.7704843",
+      "Stay": "88.05:05:51"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Karla 7",
+      "PetfinderID": null,
+      "Age": "192.02:03:43.7704843",
+      "Stay": "9.00:55:11"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Little Henry",
+      "PetfinderID": null,
+      "Age": "735.02:03:43.7704843",
+      "Stay": "3.00:43:50"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Lucky",
+      "PetfinderID": 37987470,
+      "Age": "3291.02:03:43.7704843",
+      "Stay": "3.01:52:47"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Maverick",
+      "PetfinderID": 37936126,
+      "Age": "2204.02:03:43.7704843",
+      "Stay": "11.02:38:12"
+    },
+    {
+      "Species": "Cat",
+      "Name": "McFluffin",
+      "PetfinderID": null,
+      "Age": "310.02:03:43.7704843",
+      "Stay": "5.03:35:03"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Moana",
+      "PetfinderID": 37936906,
+      "Age": "468.02:03:43.7704843",
+      "Stay": "10.03:24:30"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Socks",
+      "PetfinderID": null,
+      "Age": "1098.02:03:43.7704843",
+      "Stay": "23:20:04"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Sonny",
+      "PetfinderID": null,
+      "Age": "1278.02:03:43.7704843",
+      "Stay": "05:11:03"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Timmy",
+      "PetfinderID": 37989915,
+      "Age": "74.02:03:43.7704843",
+      "Stay": "47.00:51:16"
+    },
+    {
+      "Species": "Cat",
+      "Name": "Timmy",
+      "PetfinderID": null,
+      "Age": "317.02:03:43.7704843",
+      "Stay": "12.00:43:34"
+    },
+    {
+      "Species": "Dog",
+      "Name": "Tyler",
+      "PetfinderID": 37990050,
+      "Age": "74.02:03:43.7704843",
+      "Stay": "46.23:11:26"
+    }
+  ],
+  "GreetingText": "Ten cats, nine dogs adopted on Saturday, May 6, 2017."
+}
