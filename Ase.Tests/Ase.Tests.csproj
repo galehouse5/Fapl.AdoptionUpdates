@@ -60,6 +60,7 @@
     <Compile Include="AzureTableStoragePetIDMappingStorageServiceTests.cs" />
     <Compile Include="DailyAdoptionEmailTests.cs" />
     <Compile Include="ImageCombinerTests.cs" />
+    <Compile Include="ImagePlaceholderTests.cs" />
     <Compile Include="ImageResizerTests.cs" />
     <Compile Include="PetfinderPetIDMappingRetrivalServiceTests.cs" />
     <Compile Include="PetfinderPetImageRetrievalServiceTests.cs" />

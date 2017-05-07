@@ -94,6 +94,7 @@
     <Compile Include="DailyAdoptionEmail\DailyAdoptionEmail.cs" />
     <Compile Include="Images\ImageDataHelper.cs" />
     <Compile Include="Images\ImageCombiner.cs" />
+    <Compile Include="Images\ImagePlaceholder.cs" />
     <Compile Include="Images\ImageResizer.cs" />
     <Compile Include="Petfinder\PetfinderPetImageRetrievalService.cs" />
     <Compile Include="PetIDMapping.cs" />
@@ -125,6 +126,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\Cat.png" />
+    <EmbeddedResource Include="Icons\Bird.png" />
+    <EmbeddedResource Include="Icons\Dog.png" />
+    <EmbeddedResource Include="Icons\Rabbit.png" />
+    <EmbeddedResource Include="Icons\Pig.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

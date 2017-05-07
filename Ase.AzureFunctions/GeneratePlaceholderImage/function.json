@@ -3,11 +3,11 @@
   "bindings": [
     {
       "authLevel": "anonymous",
-      "name": "request",
+      "name": "req",
       "type": "httpTrigger",
       "direction": "in",
       "methods": [ "get" ],
-      "route": "petfinder-pets/{petID:int}/image"
+      "route": "placeholder-images/{species}/generate"
     },
     {
       "name": "res",

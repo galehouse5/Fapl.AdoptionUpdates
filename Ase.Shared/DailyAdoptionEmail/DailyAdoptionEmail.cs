@@ -30,6 +30,6 @@ namespace Ase.Shared.DailyAdoptionEmail
                     { "HeaderLogoUrl", HeaderLogoUrl },
                     { "GetPetfinderPhotoUrl", GetPetfinderPhotoUrl },
                     { "GetNoPhotoUrl", GetNoPhotoUrl }
-                }));
+                })).Trim();
     }
 }

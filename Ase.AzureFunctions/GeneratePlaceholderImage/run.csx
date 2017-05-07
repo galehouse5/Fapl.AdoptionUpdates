@@ -2,15 +2,12 @@
 #r "System.Drawing"
 
 using Ase.Shared.Images;
-using Ase.Shared.Petfinder;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 
 private static readonly CacheControlHeaderValue CacheControl = new CacheControlHeaderValue
@@ -37,44 +34,33 @@ private static HttpResponseMessage CreateOKResponse(Stream data)
     return message;
 }
 
-public static async Task<HttpResponseMessage> Run(
-    HttpRequestMessage request, int petID, TraceWriter log)
+public static HttpResponseMessage Run(
+    HttpRequestMessage req, string species, TraceWriter log)
 {
-    int? innerMargin = request.GetQueryNameValuePairs()
-        .Where(q => q.Key.Equals("inner-margin", StringComparison.OrdinalIgnoreCase))
-        .Select(q => (int?)int.Parse(q.Value)).FirstOrDefault();
-    Color? innerBackgroundColor = request.GetQueryNameValuePairs()
-        .Where(q => q.Key.Equals("inner-background-color", StringComparison.OrdinalIgnoreCase))
+    ImagePlaceholder placeholder;
+    if (!Enum.TryParse<ImagePlaceholder>(species, true, out placeholder))
+        return CreateNotFoundResponse();
+
+    Color? backgroundColor = req.GetQueryNameValuePairs()
+        .Where(q => q.Key.Equals("background-color", StringComparison.OrdinalIgnoreCase))
         .Select(q => (Color?)ColorTranslator.FromHtml($"#{q.Value}")).FirstOrDefault();
-    int? width = request.GetQueryNameValuePairs()
+    int? width = req.GetQueryNameValuePairs()
         .Where(q => q.Key.Equals("width", StringComparison.OrdinalIgnoreCase))
         .Select(q => (int?)int.Parse(q.Value)).FirstOrDefault();
-    int? height = request.GetQueryNameValuePairs()
+    int? height = req.GetQueryNameValuePairs()
         .Where(q => q.Key.Equals("height", StringComparison.OrdinalIgnoreCase))
         .Select(q => (int?)int.Parse(q.Value)).FirstOrDefault();
 
-    using (var service = new PetfinderPetImageRetrievalService())
+    using (var pass1 = placeholder.GenerateImage(backgroundColor ?? ColorTranslator.FromHtml("#222222")))
+    using (var pass2 = pass1.ResizeImageToCover(width, height))
     {
-        var imageData = await service.GetImageData(petID);
-        if (!imageData.Any()) return CreateNotFoundResponse();
-
         Stream responseData = null;
 
         try
         {
-            imageData.ProcessImageData(images =>
-            {
-                using (Image combined = images.CombineImages(
-                    RecursiveShrinkingImageLayout.Generate,
-                    margin: innerMargin ?? 0f,
-                    backgroundColor: innerBackgroundColor))
-                using (Image resized = combined.ResizeImageToCover(width, height))
-                {
-                    responseData = new MemoryStream();
-                    resized.Save(responseData, ImageFormat.Jpeg);
-                    responseData.Position = 0;
-                }
-            });
+            responseData = new MemoryStream();
+            pass2.Save(responseData, ImageFormat.Jpeg);
+            responseData.Position = 0;
 
             return CreateOKResponse(responseData);
         }

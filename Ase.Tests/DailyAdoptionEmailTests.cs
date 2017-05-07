@@ -53,9 +53,9 @@ namespace Ase.Tests
                 {
                     HeaderLogoUrl = "https://asestg.azureedge.net/public/friendship-apl-logo.png",
                     GetPetfinderPhotoUrl = (id, width, height)
-                        => $"https://ase-fns.azureedge.net/api/petfinder-pets/{id}/image?width={width}&height={height}",
+                        => $"https://ase-fns.azureedge.net/api/petfinder-images/{id}/generate?width={width}&height={height}",
                     GetNoPhotoUrl = (species, width, height)
-                        => $"?"
+                        => $"https://ase-fns.azureedge.net/api/placeholder-images/{species}/generate?width={width}&height={height}"
                 };
 
                 string htmlBody = email.GenerateHtmlBody(model);
