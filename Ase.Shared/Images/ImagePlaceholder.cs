@@ -5,7 +5,7 @@ namespace Ase.Shared.Images
 {
     public enum ImagePlaceholder
     {
-        Bird, Cat, Dog, Pig, Rabbit
+        Bird, Cat, Dog, Pig, Rabbit, Hamster
     }
 
     public static class ImagePlaceholderSpecies

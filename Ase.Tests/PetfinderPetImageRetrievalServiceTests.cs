@@ -12,14 +12,10 @@ namespace Ase.Tests
         {
             using (var service = new PetfinderPetImageRetrievalService())
             {
-                var imageData = await service.GetImageData(37935665);
+                var imageData = await service.GetImageData(37935665, 1);
 
-                Assert.AreNotEqual(0, imageData.Count);
-
-                foreach (var entry in imageData)
-                {
-                    Assert.AreNotEqual(0, entry.Length);
-                }
+                Assert.IsNotNull(imageData);
+                Assert.AreNotEqual(0, imageData.Length);
             }
         }
     }

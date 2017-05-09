@@ -26,7 +26,7 @@ namespace Ase.Shared.AdoptionList
             if (htmlBodyTemplate == null)
             {
                 htmlBodyTemplate = Handlebars.Compile(Assembly.GetExecutingAssembly()
-                    .GetManifestResourceString("Ase.Shared.AdoptionList.EmailHtmlBody.hbs"));
+                    .GetManifestResourceString("Ase.Shared.AdoptionList.EmailBodyHtml.hbs"));
             }
 
             return htmlBodyTemplate(new
@@ -45,8 +45,8 @@ namespace Ase.Shared.AdoptionList
                             align = i == 0 ? "left" : "right",
                             petfinderProfileUrl = !pet.PetfinderID.HasValue ? null
                                 : $"https://www.petfinder.com/petdetail/{pet.PetfinderID}",
-                            photoUrl = !pet.PetfinderID.HasValue ? GetNoPhotoUrl(pet.Species, 600, 332)
-                                : GetPetfinderPhotoUrl(pet.PetfinderID.Value, 600, 332),
+                            photoUrl = !pet.PetfinderID.HasValue ? GetNoPhotoUrl(pet.Species, 600, 400)
+                                : GetPetfinderPhotoUrl(pet.PetfinderID.Value, 600, 400),
                             name = pet.Name,
                             summaryText = pet.SummaryText
                         })

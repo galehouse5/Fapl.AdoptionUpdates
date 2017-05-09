@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Ase.Shared
 {
     public interface IPetImageRetrievalService
     {
-        Task<IReadOnlyCollection<byte[]>> GetImageData(int petfinderPetID);
+        Task<byte[]> GetImageData(int petfinderPetID, int imageNumber);
     }
 }

@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="AzureTableStoragePetIDMappingStorageServiceTests.cs" />
     <Compile Include="AdoptionListEmailTests.cs" />
-    <Compile Include="ImageCombinerTests.cs" />
     <Compile Include="ImagePlaceholderTests.cs" />
     <Compile Include="ImageResizerTests.cs" />
     <Compile Include="PetfinderPetIDMappingRetrivalServiceTests.cs" />
