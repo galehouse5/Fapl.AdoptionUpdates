@@ -7,15 +7,15 @@ using System;
 using System.Configuration;
 using System.Linq;
 
-private static string petfinderApiKey => ConfigurationManager.AppSettings["PetfinderApiKey"];
-private static string petfinderShelterID => ConfigurationManager.AppSettings["PetfinderShelterID"];
-private static string azureStorageConnectionString => ConfigurationManager.AppSettings["AzureWebJobsStorage"];
+private static string PetfinderApiKey => ConfigurationManager.AppSettings["PetfinderApiKey"];
+private static string PetfinderShelterID => ConfigurationManager.AppSettings["PetfinderShelterID"];
+private static string AzureStorageConnectionString => ConfigurationManager.AppSettings["AzureWebJobsStorage"];
 
 public static async Task Run(TimerInfo myTimer, TraceWriter log)
 {
-    using (var retrievalService = new PetfinderPetIDMappingRetrievalService(petfinderApiKey, petfinderShelterID))
+    using (var retrievalService = new PetfinderPetIDMappingRetrievalService(PetfinderApiKey, PetfinderShelterID))
     {
-        var storageService = new AzureTableStoragePetIDMappingStorageService(petfinderShelterID, azureStorageConnectionString, "PetIDMappings");
+        var storageService = new AzureTableStoragePetIDMappingStorageService(PetfinderShelterID, AzureStorageConnectionString, "PetIDMappings");
 
         log.Info($"Retrieving current mappings...");
         var mappings = await retrievalService.GetCurrentPetIDMappings();

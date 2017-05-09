@@ -1,115 +1,13 @@
-﻿@using Ase.Shared.DailyAdoptionEmail
-@using RazorEngine.Templating
-@inherits TemplateBase<DailyAdoptionModel>
-
-@{
-    string headerLogoUrl = ViewBag.HeaderLogoUrl;
-    GetPetfinderPhotoUrl getPetfinderPhotoUrl = ViewBag.GetPetfinderPhotoUrl;
-    GetNoPhotoUrl getNoPhotoUrl = ViewBag.GetNoPhotoUrl;
-}
-
-@helper RenderPet(
-    string align,
-    DailyAdoptionModel.Pet pet,
-    GetPetfinderPhotoUrl getPetfinderPhotoUrl,
-    GetNoPhotoUrl getNoPhotoUrl)
-{
-  <table align="@align" cellspacing="0" cellpadding="0" border="0">
-    <tr>
-      <td>
-        <table class="small-section-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
-          <tr>
-            <td class="small-section-padding-height" height="20"></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <table class="profile-2col-size" width="290" height="232" style="box-shadow:1px 1px 2px rgba(0, 0, 0, 0.15);" cellspacing="0" cellpadding="0" border="0">
-          <tr>
-            <td class="profile-2col-thumb-size" width="290" height="162">
-              @if (pet.PetfinderID.HasValue)
-              {
-                <a href="https://www.petfinder.com/petdetail/@pet.PetfinderID" style="text-decoration:none;" target="_blank">
-                  <img class="profile-2col-thumb-size" src="@getPetfinderPhotoUrl(pet.PetfinderID.Value, 600, 332)" width="290" height="162" border="0" style="display:block;">
-                </a>
-              }
-              else
-              {
-                <span style="text-decoration:none;">
-                  <img class="profile-2col-thumb-size" src="@getNoPhotoUrl(pet.Species, 600, 332)" width="290" height="162" border="0" style="display:block;">
-                </span>
-              }
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table class="profile-2col-outer-container-size" width="290" height="70" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF">
-                <tr>
-                  <td class="content-container-padding-width" width="20"></td>
-                  <td>
-                    <table class="profile-2col-inner-container-size" width="250" height="70" valign="top" cellspacing="0" cellpadding="0" border="0" style="table-layout:fixed;overflow:hidden;word-wrap:break-word;text-overflow:ellipsis">
-                      <tr>
-                        <td>
-                          <table class="content-container-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                              <td class="content-container-padding-height" height="20"></td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="profile-2col-width" width="250" valign="top">
-                          @if (pet.PetfinderID.HasValue)
-                          {
-                            <a class="profile-link-font-class" href="https://www.petfinder.com/petdetail/@pet.PetfinderID" style="font-family:sans-serif; font-size:12px; font-weight:bold; color:#222222; line-height:15px; letter-spacing:0px; -webkit-text-size-adjust:none; text-decoration:none;" target="_blank">
-                              @pet.Name
-                            </a>
-                          }
-                          else
-                          {
-                            <span class="profile-link-font-class" style="font-family:sans-serif; font-size:12px; font-weight:bold; color:#222222; line-height:15px; letter-spacing:0px; -webkit-text-size-adjust:none; text-decoration:none;">
-                              @pet.Name
-                            </span>
-                          }
-                          <div class="meta-data-font" style="font-family:sans-serif; color:#999999; font-size:12px; letter-spacing:0px; line-height:20px; -webkit-text-size-adjust:none;">
-                            @pet.SummaryText
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <table class="content-container-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                              <td class="content-container-padding-height" height="20"></td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                  <td class="content-container-padding-width" width="20"></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-}
-
-<html lang="en">
+﻿<html lang="en">
 <head>
-  <title>@Model.Title</title>
+  <title>{{title}}</title>
 
   <style type="text/css">
     * {
       font-family: sans-serif;
     }
 
-    @@media only screen and (max-device-width: 480px) {
+    @media only screen and (max-device-width: 480px) {
       body.suppress-border-on-mobile {
         margin: 0 !important;
         border: 0 !important;
@@ -205,7 +103,7 @@
       font-family: sans-serif;
     }
 
-    @@media only screen and (max-device-width: 480px) {
+    @media only screen and (max-device-width: 480px) {
       body[class=suppress-border-on-mobile] {
         margin: 0 !important;
         border: 0 !important;
@@ -299,7 +197,7 @@
 </head>
 
 <body class="suppress-border-on-mobile">
-  <span style="display: none !important; visibility: hidden; width: 0; height: 0; opacity: 0; color: transparent;">@Model.PreviewText</span>
+  <span style="display: none !important; visibility: hidden; width: 0; height: 0; opacity: 0; color: transparent;">{{previewText}}</span>
   <table class="outer-container-width" width="680" bgcolor="#f0f0f0" align="center" valign="top" cellspacing="0" cellpadding="0" border="0">
     <tr>
       <td class="outer-container-padding-width" width="40"></td>
@@ -311,7 +209,7 @@
                 <tr>
                   <td class="header_left_padding_width" width="16"></td>
                   <td class="logo_container_size" width="584" height="125" valign="center">
-                    <img class="header_logo_size" width="536" height="95" src="@headerLogoUrl" border="0" style="display:block;">
+                    <img class="header_logo_size" width="536" height="95" src="{{headerLogoUrl}}" border="0" style="display:block;">
                   </td>
                 </tr>
               </table>
@@ -327,7 +225,7 @@
                     <table class="inner-container-width" width="600" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td class="greeting-font" style="font-family:sans-serif; font-size:20px; line-height:24px; letter-spacing:0px; font-weight:bold; color:#222222; text-decoration:none; -webkit-text-size-adjust:none;">
-                          @Model.GreetingText
+                          {{greetingText}}
                         </td>
                       </tr>
                     </table>
@@ -336,18 +234,92 @@
                       <tr>
                         <td class="inner-container-width" width="600">
                           <table class="inner-container-width" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#F0F0F0">
-                            @for (var enumerator = Model.OrderedPets.GetEnumerator(); enumerator.MoveNext(); )
-                            {
-                              <tr>
-                                <td class="inner-container-width" width="600" valign="top">
-                                  @RenderPet("left", enumerator.Current, getPetfinderPhotoUrl, getNoPhotoUrl)
-
-                                  @if (!enumerator.MoveNext()) { break; }
-
-                                  @RenderPet("right", enumerator.Current, getPetfinderPhotoUrl, getNoPhotoUrl)
-                                </td>
-                              </tr>
-                            }
+                            {{#each rows}}
+                            <tr>
+                              <td class="inner-container-width" width="600" valign="top">
+                                {{#each pets}}
+                                <table align="{{align}}" cellspacing="0" cellpadding="0" border="0">
+                                  <tr>
+                                    <td>
+                                      <table class="small-section-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                          <td class="small-section-padding-height" height="20"></td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <table class="profile-2col-size" width="290" height="232" style="box-shadow:1px 1px 2px rgba(0, 0, 0, 0.15);" cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                          <td class="profile-2col-thumb-size" width="290" height="162">
+                                            {{#if petfinderProfileUrl}}
+                                            <a href="{{petfinderProfileUrl}}" style="text-decoration:none;" target="_blank">
+                                              <img class="profile-2col-thumb-size" src="{{photoUrl}}" width="290" height="162" border="0" style="display:block;">
+                                            </a>
+                                            {{else}}
+                                            <div style="text-decoration:none;">
+                                              <img class="profile-2col-thumb-size" src="{{photoUrl}}" width="290" height="162" border="0" style="display:block;">
+                                            </div>
+                                            {{/if}}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <table class="profile-2col-outer-container-size" width="290" height="70" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF">
+                                              <tr>
+                                                <td class="content-container-padding-width" width="20"></td>
+                                                <td>
+                                                  <table class="profile-2col-inner-container-size" width="250" height="70" valign="top" cellspacing="0" cellpadding="0" border="0" style="table-layout:fixed;overflow:hidden;word-wrap:break-word;text-overflow:ellipsis">
+                                                    <tr>
+                                                      <td>
+                                                        <table class="content-container-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
+                                                          <tr>
+                                                            <td class="content-container-padding-height" height="20"></td>
+                                                          </tr>
+                                                        </table>
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td class="profile-2col-width" width="250" valign="top">
+                                                        {{#if petfinderProfileUrl}}
+                                                        <a class="profile-link-font-class" href="{{petfinderProfileUrl}}" style="font-family:sans-serif; font-size:12px; font-weight:bold; color:#222222; line-height:15px; letter-spacing:0px; -webkit-text-size-adjust:none; text-decoration:none;" target="_blank">
+                                                          {{name}}
+                                                        </a>
+                                                        {{else}}
+                                                        <div class="profile-link-font-class" style="font-family:sans-serif; font-size:12px; font-weight:bold; color:#222222; line-height:15px; letter-spacing:0px; -webkit-text-size-adjust:none; text-decoration:none;">
+                                                          {{name}}
+                                                        </div>
+                                                        {{/if}}
+                                                        <div class="meta-data-font" style="font-family:sans-serif; color:#999999; font-size:12px; letter-spacing:0px; line-height:20px; -webkit-text-size-adjust:none;">
+                                                          {{summaryText}}
+                                                        </div>
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>
+                                                        <table class="content-container-padding-height" height="20" cellspacing="0" cellpadding="0" border="0">
+                                                          <tr>
+                                                            <td class="content-container-padding-height" height="20"></td>
+                                                          </tr>
+                                                        </table>
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                                <td class="content-container-padding-width" width="20"></td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                {{/each}}
+                              </td>
+                            </tr>
+                            {{/each}}
                           </table>
                         </td>
                       </tr>

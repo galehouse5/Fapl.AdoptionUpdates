@@ -1,5 +1,5 @@
 ﻿using Ase.Shared.AzureStorage;
-using Ase.Shared.DailyAdoptionEmail;
+using Ase.Shared.AdoptionList;
 using Ase.Shared.PetPoint;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Ase.Tests
 {
     [TestClass]
-    public class DailyAdoptionEmailTests
+    public class AdoptionListEmailTests
     {
         private static string PetPointAuthKey => ConfigurationManager.AppSettings["PetPointAuthKey"];
         private static string PetPointShelterID => ConfigurationManager.AppSettings["PetPointShelterID"];
@@ -30,7 +30,7 @@ namespace Ase.Tests
             {
                 var petIDMappingService = new AzureTableStoragePetIDMappingStorageService(
                     PetfinderShelterID, AzureStorageConnectionString, "PetIDMappings");
-                var factory = new DailyAdoptionModelFactory(adoptedPetsService, petInfoService, petIDMappingService);
+                var factory = new ModelFactory(adoptedPetsService, petInfoService, petIDMappingService);
 
                 await petInfoService.LogIn(PetPointUsername, PetPointPassword);
                 var model = await factory.CreateModel(new DateTime(2017, 5, 5));
@@ -45,17 +45,17 @@ namespace Ase.Tests
         public void GeneratesHtmlBody()
         {
             using (var data = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("Ase.Tests.DailyAdoptionModel.json"))
+                .GetManifestResourceStream("Ase.Tests.AdoptionListModel.json"))
             using (TextReader reader = new StreamReader(data))
             {
-                DailyAdoptionModel model = JsonConvert.DeserializeObject<DailyAdoptionModel>(reader.ReadToEnd());
-                DailyAdoptionEmail email = new DailyAdoptionEmail
+                Model model = JsonConvert.DeserializeObject<Model>(reader.ReadToEnd());
+                EmailBuilder email = new EmailBuilder
                 {
                     HeaderLogoUrl = "https://asestg.azureedge.net/public/friendship-apl-logo.png",
                     GetPetfinderPhotoUrl = (id, width, height)
                         => $"https://ase-fns.azureedge.net/api/petfinder-images/{id}/generate?width={width}&height={height}",
                     GetNoPhotoUrl = (species, width, height)
-                        => $"https://ase-fns.azureedge.net/api/placeholder-images/{species}/generate?width={width}&height={height}"
+                        => $"https://ase-fns.azureedge.net/api/placeholder-images/{species}/generate?width={width}&height={height}&background-color=e0e0e0"
                 };
 
                 string htmlBody = email.GenerateHtmlBody(model);

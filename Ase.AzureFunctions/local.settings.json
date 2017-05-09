@@ -4,6 +4,12 @@
     "AzureWebJobsStorage": "(private)",
     "AzureWebJobsDashboard": "(private)",
     "PetfinderApiKey": "(private)",
-    "PetfinderShelterID": "(private)"
+    "PetfinderShelterID": "OH166",
+    "PetPointAuthKey": "(private)",
+    "PetPointShelterID": "USOH69",
+    "PetPointPassword": "(private)",
+    "PetPointUsername": "(private)",
+    "ApiBaseUrl": "https://ase-fns.azureedge.net/api",
+    "HeaderLogoUrl": "https://asestg.azureedge.net/public/friendship-apl-logo.png"
   }
 }

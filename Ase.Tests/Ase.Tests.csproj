@@ -58,7 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AzureTableStoragePetIDMappingStorageServiceTests.cs" />
-    <Compile Include="DailyAdoptionEmailTests.cs" />
+    <Compile Include="AdoptionListEmailTests.cs" />
     <Compile Include="ImageCombinerTests.cs" />
     <Compile Include="ImagePlaceholderTests.cs" />
     <Compile Include="ImageResizerTests.cs" />
@@ -87,7 +87,7 @@
     <EmbeddedResource Include="Images\two-image-combo.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DailyAdoptionModel.json" />
+    <EmbeddedResource Include="AdoptionListModel.json" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

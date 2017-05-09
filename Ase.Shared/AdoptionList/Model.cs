@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ase.Shared.DailyAdoptionEmail
+namespace Ase.Shared.AdoptionList
 {
-    public class DailyAdoptionModel
+    public class Model
     {
         public class Pet
         {
@@ -26,9 +26,6 @@ namespace Ase.Shared.DailyAdoptionEmail
 
         public DateTime Date { get; set; }
         public IReadOnlyCollection<Pet> Pets { get; set; }
-        public IEnumerable<Pet> OrderedPets => Pets
-            .OrderBy(p => p.Name)
-            .ThenByDescending(p => p.Stay);
 
         public string Title
             => $"{Date:yyyy-MM-dd}, {Date:dddd}";
