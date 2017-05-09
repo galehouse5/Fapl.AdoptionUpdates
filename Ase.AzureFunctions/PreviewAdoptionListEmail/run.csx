@@ -37,7 +37,7 @@ private static string GenerateHtmlBody(Model model)
     {
         HeaderLogoUrl = HeaderLogoUrl,
         GetPetfinderPhotoUrl = (id, width, height)
-            => $"{ApiBaseUrl}/petfinder-images/{id}/generate?width={width}&height={height}",
+            => $"{ApiBaseUrl}/petfinder-images/{id}/1/generate?width={width}&height={height}",
         GetNoPhotoUrl = (species, width, height)
             => $"{ApiBaseUrl}/placeholder-images/{species}/generate?width={width}&height={height}&background-color=e0e0e0"
     };

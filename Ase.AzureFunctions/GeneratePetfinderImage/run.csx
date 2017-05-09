@@ -4,13 +4,11 @@
 using Ase.Shared.Images;
 using Ase.Shared.Petfinder;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 
 private static readonly CacheControlHeaderValue CacheControl = new CacheControlHeaderValue
@@ -38,14 +36,8 @@ private static HttpResponseMessage CreateOKResponse(Stream data)
 }
 
 public static async Task<HttpResponseMessage> Run(
-    HttpRequestMessage req, int petID, TraceWriter log)
+    HttpRequestMessage req, int petID, int imageNumber, TraceWriter log)
 {
-    int? innerMargin = req.GetQueryNameValuePairs()
-        .Where(q => q.Key.Equals("inner-margin", StringComparison.OrdinalIgnoreCase))
-        .Select(q => (int?)int.Parse(q.Value)).FirstOrDefault();
-    Color? innerBackgroundColor = req.GetQueryNameValuePairs()
-        .Where(q => q.Key.Equals("inner-background-color", StringComparison.OrdinalIgnoreCase))
-        .Select(q => (Color?)ColorTranslator.FromHtml($"#{q.Value}")).FirstOrDefault();
     int? width = req.GetQueryNameValuePairs()
         .Where(q => q.Key.Equals("width", StringComparison.OrdinalIgnoreCase))
         .Select(q => (int?)int.Parse(q.Value)).FirstOrDefault();
@@ -55,33 +47,28 @@ public static async Task<HttpResponseMessage> Run(
 
     using (var service = new PetfinderPetImageRetrievalService())
     {
-        var imageData = await service.GetImageData(petID);
-        if (!imageData.Any()) return CreateNotFoundResponse();
+        var imageData = await service.GetImageData(petID, imageNumber);
+        if (imageData == null) return CreateNotFoundResponse();
 
-        Stream responseData = null;
-
-        try
+        using (Stream imageStream = new MemoryStream(imageData))
+        using (Image inputImage = new Bitmap(imageStream))
+        using (Image outputImage = inputImage.ResizeImageToCover(width, height))
         {
-            imageData.ProcessImageData(images =>
+            Stream responseData = null;
+
+            try
             {
-                using (Image pass1 = images.CombineImages(
-                    RecursiveShrinkingImageLayout.Generate,
-                    margin: innerMargin ?? 0f,
-                    backgroundColor: innerBackgroundColor))
-                using (Image pass2 = pass1.ResizeImageToCover(width, height))
-                {
-                    responseData = new MemoryStream();
-                    pass2.Save(responseData, ImageFormat.Jpeg);
-                    responseData.Position = 0;
-                }
-            });
+                responseData = new MemoryStream();
+                outputImage.Save(responseData, ImageFormat.Jpeg);
+                responseData.Position = 0;
 
-            return CreateOKResponse(responseData);
-        }
-        catch (Exception)
-        {
-            responseData?.Dispose();
-            throw;
+                return CreateOKResponse(responseData);
+            }
+            catch
+            {
+                responseData?.Dispose();
+                throw;
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -23,27 +22,18 @@ namespace Ase.Shared.Petfinder
             };
         }
 
-        public async Task<IReadOnlyCollection<byte[]>> GetImageData(int petfinderPetID)
+        public async Task<byte[]> GetImageData(int petfinderPetID, int imageNumber)
         {
-            var imageData = new List<byte[]>();
-
-            for (int i = 1; true; i++)
+            using (HttpResponseMessage response = await client.GetAsync($"{petfinderPetID}/{imageNumber}/"))
             {
-                using (HttpResponseMessage response = await client.GetAsync($"{petfinderPetID}/{i}/"))
-                {
-                    if (response.StatusCode == HttpStatusCode.UnsupportedMediaType) break;
+                if (response.StatusCode == HttpStatusCode.UnsupportedMediaType)
+                    return null;
 
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        imageData.Add(await response.Content.ReadAsByteArrayAsync());
-                        continue;
-                    }
+                if (response.StatusCode == HttpStatusCode.OK)
+                    return await response.Content.ReadAsByteArrayAsync();
 
-                    throw new Exception("Expected HTTP 200 (OK) or 415 (Unsupported Media Type) response.");
-                }
+                throw new Exception("Expected HTTP 200 (OK) or 415 (Unsupported Media Type) response.");
             }
-
-            return imageData;
         }
 
         public void Dispose()
