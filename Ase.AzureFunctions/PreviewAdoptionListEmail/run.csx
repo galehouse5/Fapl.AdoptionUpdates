@@ -39,7 +39,7 @@ private static string GenerateHtmlBody(Model model)
         GetPetfinderPhotoUrl = (id, width, height)
             => $"{ApiBaseUrl}/petfinder-images/{id}/1/generate?width={width}&height={height}",
         GetNoPhotoUrl = (species, width, height)
-            => $"{ApiBaseUrl}/placeholder-images/{species}/generate?width={width}&height={height}&background-color=e0e0e0"
+            => $"{ApiBaseUrl}/placeholder-images/{species.Replace(" ", null)}/generate?width={width}&height={height}&background-color=e1e1e1"
     };
 
     return builder.GenerateHtmlBody(model);

@@ -131,13 +131,31 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\Cat.png" />
-    <EmbeddedResource Include="Icons\Bird.png" />
     <EmbeddedResource Include="Icons\Dog.png" />
     <EmbeddedResource Include="Icons\Rabbit.png" />
     <EmbeddedResource Include="Icons\Pig.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Icons\Hamster.png" />
+    <EmbeddedResource Include="Icons\Duck.png" />
+    <EmbeddedResource Include="Icons\Snake.png" />
+    <EmbeddedResource Include="Icons\Cattle.png" />
+    <EmbeddedResource Include="Icons\Horse.png" />
+    <EmbeddedResource Include="Icons\Donkey.png" />
+    <EmbeddedResource Include="Icons\Mouse.png" />
+    <EmbeddedResource Include="Icons\Chicken.png" />
+    <EmbeddedResource Include="Icons\Turtle.png" />
+    <EmbeddedResource Include="Icons\Tortoise.png" />
+    <EmbeddedResource Include="Icons\Goose.png" />
+    <EmbeddedResource Include="Icons\Rat.png" />
+    <EmbeddedResource Include="Icons\Gerbil.png" />
+    <EmbeddedResource Include="Icons\GuineaPig.png" />
+    <EmbeddedResource Include="Icons\Fowl.png" />
+    <EmbeddedResource Include="Icons\Parakeet.png" />
+    <EmbeddedResource Include="Icons\Lizard.png" />
+    <EmbeddedResource Include="Icons\Iguana.png" />
+    <EmbeddedResource Include="Icons\Chinchilla.png" />
+    <EmbeddedResource Include="Icons\Goat.png" />
+    <EmbeddedResource Include="Icons\Ferret.png" />
+    <EmbeddedResource Include="Icons\Pigeon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

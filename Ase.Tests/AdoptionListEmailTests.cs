@@ -55,7 +55,7 @@ namespace Ase.Tests
                     GetPetfinderPhotoUrl = (id, width, height)
                         => $"https://ase-fns.azureedge.net/api/petfinder-images/{id}/1/generate?width={width}&height={height}",
                     GetNoPhotoUrl = (species, width, height)
-                        => $"https://ase-fns.azureedge.net/api/placeholder-images/{species}/generate?width={width}&height={height}&background-color=e0e0e0"
+                        => $"https://ase-fns.azureedge.net/api/placeholder-images/{species.Replace(" ", null)}/generate?width={width}&height={height}&background-color=e0e0e0"
                 };
 
                 string htmlBody = email.GenerateHtmlBody(model);
