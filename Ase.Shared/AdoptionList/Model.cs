@@ -16,8 +16,8 @@ namespace Ase.Shared.AdoptionList
             public TimeSpan? Age { get; set; }
             public TimeSpan? Stay { get; set; }
 
-            public string SummaryText
-                => string.Join(" • ", new[]
+            public string GetSummaryText(string separator)
+                => string.Join(separator, new[]
                 {
                     Age.HasValue ? $"{Age.Value.Humanize(maxUnit: TimeUnit.Year)} old" : null,
                     Stay.HasValue ? $"{Stay.Value.Humanize(maxUnit: TimeUnit.Year).Replace("s", null)} stay" : null

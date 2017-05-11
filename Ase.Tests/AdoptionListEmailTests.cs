@@ -1,5 +1,5 @@
-﻿using Ase.Shared.AzureStorage;
-using Ase.Shared.AdoptionList;
+﻿using Ase.Shared.AdoptionList;
+using Ase.Shared.AzureStorage;
 using Ase.Shared.PetPoint;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -41,27 +41,43 @@ namespace Ase.Tests
             }
         }
 
-        [TestMethod]
-        public void GeneratesHtmlBody()
+        protected Model CreateTestModel()
         {
             using (var data = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("Ase.Tests.AdoptionListModel.json"))
             using (TextReader reader = new StreamReader(data))
             {
-                Model model = JsonConvert.DeserializeObject<Model>(reader.ReadToEnd());
-                EmailBuilder email = new EmailBuilder
-                {
-                    HeaderLogoUrl = "https://asestg.azureedge.net/public/friendship-apl-logo.png",
-                    GetPetfinderPhotoUrl = (id, width, height)
-                        => $"https://ase-fns.azureedge.net/api/petfinder-images/{id}/1/generate?width={width}&height={height}",
-                    GetNoPhotoUrl = (species, width, height)
-                        => $"https://ase-fns.azureedge.net/api/placeholder-images/{species.Replace(" ", null)}/generate?width={width}&height={height}&background-color=e0e0e0"
-                };
-
-                string htmlBody = email.GenerateHtmlBody(model);
-
-                Assert.IsNotNull(htmlBody);
+                return JsonConvert.DeserializeObject<Model>(reader.ReadToEnd());
             }
+        }
+
+        [TestMethod]
+        public void GeneratesHtmlBody()
+        {
+            Model model = CreateTestModel();
+            EmailBuilder email = new EmailBuilder
+            {
+                HeaderLogoUrl = "https://asestg.azureedge.net/public/friendship-apl-logo.png",
+                GetPetfinderPhotoUrl = (id, width, height)
+                    => $"https://ase-fns.azureedge.net/api/petfinder-images/{id}/1/generate?width={width}&height={height}",
+                GetNoPhotoUrl = (species, width, height)
+                    => $"https://ase-fns.azureedge.net/api/placeholder-images/{species.Replace(" ", null)}/generate?width={width}&height={height}&background-color=e1e1e1"
+            };
+
+            string htmlBody = email.GenerateHtmlBody(model);
+
+            Assert.IsNotNull(htmlBody);
+        }
+
+        [TestMethod]
+        public void GeneratesTextBody()
+        {
+            Model model = CreateTestModel();
+            EmailBuilder email = new EmailBuilder();
+
+            string textBody = email.GenerateTextBody(model);
+
+            Assert.IsNotNull(textBody);
         }
     }
 }

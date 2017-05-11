@@ -13,6 +13,7 @@ namespace Ase.Shared.AdoptionList
     public class EmailBuilder
     {
         private Func<object, string> htmlBodyTemplate;
+        private Func<object, string> textBodyTemplate;
 
         public string HeaderLogoUrl { get; set; }
         public GetPetfinderPhotoUrl GetPetfinderPhotoUrl { get; set; }
@@ -48,8 +49,33 @@ namespace Ase.Shared.AdoptionList
                             photoUrl = !pet.PetfinderID.HasValue ? GetNoPhotoUrl(pet.Species, 600, 400)
                                 : GetPetfinderPhotoUrl(pet.PetfinderID.Value, 600, 400),
                             name = pet.Name,
-                            summaryText = pet.SummaryText
+                            summaryText = pet.GetSummaryText(" • ")
                         })
+                    })
+            });
+        }
+
+        public string GenerateTextBody(Model model)
+        {
+            if (textBodyTemplate == null)
+            {
+                textBodyTemplate = Handlebars.Compile(Assembly.GetExecutingAssembly()
+                    .GetManifestResourceString("Ase.Shared.AdoptionList.EmailBodyText.hbs"));
+            }
+
+            return textBodyTemplate(new
+            {
+                greetingText = model.GreetingText,
+                pets = model.Pets
+                    .OrderBy(p => p.Name)
+                    .ThenByDescending(p => p.Stay)
+                    .Select(pet => new
+                    {
+                        name = pet.Name,
+                        species = pet.Species,
+                        summaryText = pet.GetSummaryText(", "),
+                        petfinderProfileUrl = !pet.PetfinderID.HasValue ? null
+                            : $"https://www.petfinder.com/petdetail/{pet.PetfinderID}"
                     })
             });
         }

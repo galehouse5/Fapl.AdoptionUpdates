@@ -121,6 +121,9 @@
     <EmbeddedResource Include="AdoptionList\EmailBodyHtml.hbs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdoptionList\EmailBodyText.hbs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Petfinder\petfinder.xsd">
       <SubType>Designer</SubType>
