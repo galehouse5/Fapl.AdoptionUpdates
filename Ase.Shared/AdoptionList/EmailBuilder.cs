@@ -10,7 +10,7 @@ namespace Ase.Shared.AdoptionList
     public delegate string GetPetfinderPhotoUrl(int petID, int width, int height);
     public delegate string GetNoPhotoUrl(string species, int width, int height);
 
-    public class EmailBuilder
+    public class EmailBuilder : IEmailBuilder<Model>
     {
         private Func<object, string> htmlBodyTemplate;
         private Func<object, string> textBodyTemplate;
@@ -37,8 +37,6 @@ namespace Ase.Shared.AdoptionList
                 headerLogoUrl = HeaderLogoUrl,
                 greetingText = model.GreetingText,
                 rows = model.Pets
-                    .OrderBy(p => p.Name)
-                    .ThenByDescending(p => p.Stay)
                     .Batch(2).Select(row => new
                     {
                         pets = row.Select((pet, i) => new

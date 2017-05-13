@@ -51,11 +51,8 @@ namespace Ase.Tests
             }
         }
 
-        [TestMethod]
-        public void GeneratesHtmlBody()
-        {
-            Model model = CreateTestModel();
-            EmailBuilder email = new EmailBuilder
+        protected EmailBuilder CreateEmailBuilder()
+            => new EmailBuilder
             {
                 HeaderLogoUrl = "https://asestg.azureedge.net/public/friendship-apl-logo.png",
                 GetPetfinderPhotoUrl = (id, width, height)
@@ -64,6 +61,11 @@ namespace Ase.Tests
                     => $"https://ase-fns.azureedge.net/api/placeholder-images/{species.Replace(" ", null)}/generate?width={width}&height={height}&background-color=e1e1e1"
             };
 
+        [TestMethod]
+        public void GeneratesHtmlBody()
+        {
+            EmailBuilder email = CreateEmailBuilder();
+            Model model = CreateTestModel();
             string htmlBody = email.GenerateHtmlBody(model);
 
             Assert.IsNotNull(htmlBody);
@@ -72,9 +74,8 @@ namespace Ase.Tests
         [TestMethod]
         public void GeneratesTextBody()
         {
+            EmailBuilder email = CreateEmailBuilder();
             Model model = CreateTestModel();
-            EmailBuilder email = new EmailBuilder();
-
             string textBody = email.GenerateTextBody(model);
 
             Assert.IsNotNull(textBody);

@@ -97,6 +97,8 @@
     <Compile Include="AzureStorage\TableClientHelper.cs" />
     <Compile Include="AdoptionList\EmailBuilder.cs" />
     <Compile Include="Helpers\AssemblyHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="IEmailBuilder.cs" />
     <Compile Include="Images\ImagePlaceholder.cs" />
     <Compile Include="Images\ImageResizer.cs" />
     <Compile Include="Petfinder\PetfinderPetImageRetrievalService.cs" />

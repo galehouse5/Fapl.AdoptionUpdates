@@ -28,10 +28,10 @@ namespace Ase.Shared.AdoptionList
         public IReadOnlyCollection<Pet> Pets { get; set; }
 
         public string Title
-            => $"{Date:yyyy-MM-dd}, {Date:dddd}";
+            => $"{Date:yyyy-MM-dd}, {Pets.Count} adoption{(Pets.Count == 1 ? null : "s")} for {Date:dddd}";
 
         public string PreviewText
-            => $"{GetSpeciesAdoptionCountsText(i => i.ToString())} adopted";
+            => $"{GetSpeciesAdoptionCountsText(i => i.ToString())}: {Pets.Select(p => p.Name).Humanize()}";
 
         public string GreetingText
             => string.Format("{0} adopted on {1:dddd, MMM d, yyyy}.",

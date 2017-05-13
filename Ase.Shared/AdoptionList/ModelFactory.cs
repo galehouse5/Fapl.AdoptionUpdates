@@ -37,15 +37,18 @@ namespace Ase.Shared.AdoptionList
             return new Model
             {
                 Date = date,
-                Pets = pets.Select(p => new Model.Pet
-                {
-                    Species = p.Species,
-                    Name = p.Name,
-                    PetfinderID = mappings.ContainsKey(p.ReferenceNumber) ?
-                        mappings[p.ReferenceNumber] : (int?)null,
-                    Age = DateTime.UtcNow - p.Dob,
-                    Stay = p.GetLastStayLength(date.AddDays(1))
-                }).ToArray()
+                Pets = (from pet in pets
+                        let stay = pet.GetLastStayLength(date.AddDays(1))
+                        orderby pet.Name, stay descending
+                        select new Model.Pet
+                        {
+                            Species = pet.Species,
+                            Name = pet.Name,
+                            PetfinderID = mappings.ContainsKey(pet.ReferenceNumber) ?
+                                 mappings[pet.ReferenceNumber] : (int?)null,
+                            Age = DateTime.UtcNow - pet.Dob,
+                            Stay = pet.GetLastStayLength(date.AddDays(1))
+                        }).ToArray()
             };
         }
     }
