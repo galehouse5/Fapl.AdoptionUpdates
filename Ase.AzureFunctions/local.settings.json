@@ -10,6 +10,15 @@
     "PetPointPassword": "(private)",
     "PetPointUsername": "(private)",
     "ApiBaseUrl": "https://ase-fns.azureedge.net/api",
-    "HeaderLogoUrl": "https://asestg.azureedge.net/public/friendship-apl-logo.png"
+    "HeaderLogoUrl": "https://asestg.azureedge.net/public/friendship-apl-logo.png",
+    "SmtpHost": "smtp.sendgrid.net",
+    "SmtpPort": "587",
+    "SmtpEnableSsl": "true",
+    "SmtpUserName": "(private)",
+    "SmtpPassword": "(private)",
+    "AdoptionListFromAddress": "friendship-app@friendshipapp.org",
+    "AdoptionListToAddress": "adoption-updates@friendshipapp.org",
+    "AdoptionListBccAddress": "(private)",
+    "WEBSITE_TIME_ZONE": "Eastern Standard Time"
   }
 }

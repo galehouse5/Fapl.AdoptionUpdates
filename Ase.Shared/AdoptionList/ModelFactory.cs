@@ -21,15 +21,18 @@ namespace Ase.Shared.AdoptionList
             this.petIDMappingService = petIDMappingService;
         }
 
-        public async Task<Model> CreateModel(DateTime date)
+        public async Task<Model> CreateModel(DateTime date, Action<string> logger = null)
         {
             var pets = new List<IPetInfo>();
 
+            logger?.Invoke("Getting adopted pet IDs...");
             foreach (int id in await adoptedPetsService.GetAdoptedPetIDs(date))
             {
+                logger?.Invoke($"Getting info for pet {id}...");
                 pets.Add(await petInfoService.GetPetInfo(id));
             }
 
+            logger?.Invoke("Getting ID mappings for adopted pets...");
             var mappings = (await petIDMappingService
                 .GetMappings(pets.Select(p => p.ReferenceNumber)))
                 .ToDictionary(m => m.PetPointReferenceNumber, m => m.PetfinderID);

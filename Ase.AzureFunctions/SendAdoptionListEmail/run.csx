@@ -1,13 +1,23 @@
 ﻿#r "..\Shared\Ase.Shared.dll"
+#r "System.Configuration"
 
+using Ase.Shared;
 using Ase.Shared.AzureStorage;
 using Ase.Shared.AdoptionList;
 using Ase.Shared.PetPoint;
 using System;
 using System.Configuration;
 using System.Net;
-using System.Net.Http.Headers;
+using System.Net.Mail;
 
+private static string Host => ConfigurationManager.AppSettings["SmtpHost"];
+private static int Port => int.Parse(ConfigurationManager.AppSettings["SmtpPort"] ?? "587");
+private static bool EnableSsl => bool.Parse(ConfigurationManager.AppSettings["SmtpEnableSsl"] ?? "true");
+private static string UserName => ConfigurationManager.AppSettings["SmtpUserName"];
+private static string Password => ConfigurationManager.AppSettings["SmtpPassword"];
+private static string FromAddress => ConfigurationManager.AppSettings["AdoptionListFromAddress"];
+private static string ToAddress => ConfigurationManager.AppSettings["AdoptionListToAddress"];
+private static string BccAddress => ConfigurationManager.AppSettings["AdoptionListBccAddress"];
 private static string PetfinderShelterID => ConfigurationManager.AppSettings["PetfinderShelterID"];
 private static string PetPointAuthKey => ConfigurationManager.AppSettings["PetPointAuthKey"];
 private static string PetPointShelterID => ConfigurationManager.AppSettings["PetPointShelterID"];
@@ -32,8 +42,9 @@ private static async Task<Model> CreateModel(DateTime date, TraceWriter log)
     }
 }
 
-private static string GenerateHtmlBody(Model model)
+public static async Task Run(TimerInfo myTimer, TraceWriter log)
 {
+    Model model = await CreateModel(DateTime.Today, log);
     EmailBuilder builder = new EmailBuilder
     {
         HeaderLogoUrl = HeaderLogoUrl,
@@ -43,16 +54,21 @@ private static string GenerateHtmlBody(Model model)
             => $"{ApiBaseUrl}/placeholder-images/{species.Replace(" ", null)}/generate?width={width}&height={height}&background-color=e1e1e1"
     };
 
-    return builder.GenerateHtmlBody(model);
-}
+    using (SmtpClient client = new SmtpClient(Host, Port)
+    {
+        EnableSsl = EnableSsl,
+        Credentials = new NetworkCredential(UserName, Password)
+    })
+    using (MailMessage message = new MailMessage(FromAddress, ToAddress))
+    {
+        if (!string.IsNullOrEmpty(BccAddress))
+        {
+            message.Bcc.Add(BccAddress);
+        }
 
-public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, DateTime date, TraceWriter log)
-{
-    Model model = await CreateModel(date, log);
-    string htmlBody = GenerateHtmlBody(model);
+        builder.Populate(message, model);
 
-    HttpContent content = new StringContent(htmlBody);
-    content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
-
-    return new HttpResponseMessage(HttpStatusCode.OK) { Content = content };
+        log.Info($"Sending email to {ToAddress}...");
+        await client.SendMailAsync(message);
+    }
 }
