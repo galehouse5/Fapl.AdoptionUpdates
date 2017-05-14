@@ -52,11 +52,8 @@ namespace Ase.Shared.Petfinder
 
                     return pets.pet
                         .Where(p => !string.IsNullOrEmpty(p.shelterPetId))
-                        .Select(p => new PetIDMapping
-                        {
-                            PetfinderID = int.Parse(p.id),
-                            PetPointReferenceNumber = p.shelterPetId
-                        }).ToArray();
+                        .SelectMany(p => PetIDMapping.Create(p.shelterPetId, int.Parse(p.id)))
+                        .ToArray();
                 }
             }
         }

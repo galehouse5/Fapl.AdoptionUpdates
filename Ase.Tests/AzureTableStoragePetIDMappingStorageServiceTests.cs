@@ -10,7 +10,7 @@ namespace Ase.Tests
     [TestClass]
     public class AzureTableStoragePetIDMappingStorageServiceTests
     {
-        private static string ShelterID => ConfigurationManager.AppSettings["PetPointShelterID"];
+        private static string ShelterID => ConfigurationManager.AppSettings["PetfinderShelterID"];
         private static string ConnectionString => ConfigurationManager.ConnectionStrings["AzureStorage"].ConnectionString;
 
         private PetIDMapping[] mappingData = new[]

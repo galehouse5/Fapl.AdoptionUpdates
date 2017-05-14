@@ -63,6 +63,7 @@
     <Compile Include="ImageResizerTests.cs" />
     <Compile Include="PetfinderPetIDMappingRetrivalServiceTests.cs" />
     <Compile Include="PetfinderPetImageRetrievalServiceTests.cs" />
+    <Compile Include="PetIDMappingTests.cs" />
     <Compile Include="PetPointAdoptedPetServiceTests.cs" />
     <Compile Include="PetPointPetInfoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

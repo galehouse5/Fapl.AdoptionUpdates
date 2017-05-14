@@ -47,13 +47,22 @@ namespace Ase.Shared.AzureStorage
             {
                 Properties = new Dictionary<string, EntityProperty>
                 {
-                    { "PetfinderID",  new EntityProperty(mapping.PetfinderID) }
+                    { "PetfinderID",  new EntityProperty(mapping.PetfinderID) },
+                    { "PetPointReferenceNumbers", new EntityProperty(mapping.PetPointReferenceNumbers) }
                 }
             };
 
         public async Task Upsert(IEnumerable<PetIDMapping> mappings)
         {
             await table.CreateIfNotExistsAsync();
+
+            // Inserting duplicate PetPoint reference numbers in the same batch causes an exception because
+            // it's the row key, so must be unique. Just simulate the behavior of the last row overwritting
+            // previous rows by discarding all duplicates except for the last.
+            mappings = mappings
+                .GroupBy(m => m.PetPointReferenceNumber)
+                .Select(g => g.Last())
+                .ToArray();
 
             while (mappings.Any())
             {
