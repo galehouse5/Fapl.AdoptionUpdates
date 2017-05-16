@@ -1,4 +1,4 @@
-﻿#r "..\Shared\Ase.Shared.dll"
+﻿#r "Shared\Ase.Shared.dll"
 #r "System.Configuration"
 
 using Ase.Shared;
@@ -42,7 +42,7 @@ private static async Task<Model> CreateModel(DateTime date, TraceWriter log)
     }
 }
 
-public static async Task Run(TimerInfo myTimer, TraceWriter log)
+public static async Task SendAdoptionListEmail(TraceWriter log)
 {
     Model model = await CreateModel(DateTime.Today, log);
     EmailBuilder builder = new EmailBuilder
