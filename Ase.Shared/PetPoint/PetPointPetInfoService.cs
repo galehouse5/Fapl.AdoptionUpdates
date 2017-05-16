@@ -28,21 +28,23 @@ namespace Ase.Shared.PetPoint
 
         public async Task LogIn(string username, string password)
         {
-            using (HttpResponseMessage response = await client.PostAsync("forms/signinout.aspx", new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("hetvege", Guid.NewGuid().ToString()),
-                new KeyValuePair<string, string>("__VIEWSTATE", string.Empty),
-                new KeyValuePair<string, string>("ctl00$cphSearchArea$txtShelterPetFinderId", shelterID),
-                new KeyValuePair<string, string>("ctl00$cphSearchArea$txtUserName", username),
-                new KeyValuePair<string, string>("ctl00$cphSearchArea$txtPassword", password),
-                new KeyValuePair<string, string>("ctl00$cphSearchArea$btn_SignIn", "Sign+in...")
-            })))
+            using (HttpResponseMessage response = await client.PostAsync(
+                "forms/signinout.aspx?ReturnUrl=%2fsms3%2fforms%2fadmineditmyaccount.aspx",
+                new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("hetvege", Guid.NewGuid().ToString()),
+                    new KeyValuePair<string, string>("__VIEWSTATE", string.Empty),
+                    new KeyValuePair<string, string>("ctl00$cphSearchArea$txtShelterPetFinderId", shelterID),
+                    new KeyValuePair<string, string>("ctl00$cphSearchArea$txtUserName", username),
+                    new KeyValuePair<string, string>("ctl00$cphSearchArea$txtPassword", password),
+                    new KeyValuePair<string, string>("ctl00$cphSearchArea$btn_SignIn", "Sign+in...")
+                })))
             {
                 if (response.StatusCode != HttpStatusCode.Found)
                     throw new Exception("Expected HTTP 302 (Found) response.");
 
-                if (!new Uri("/sms3/default.aspx", UriKind.Relative).Equals(response.Headers.Location))
-                    throw new Exception("Expected HTTP redirect to `/sms3/default.aspx`.");
+                if (!new Uri("/sms3/forms/admineditmyaccount.aspx", UriKind.Relative).Equals(response.Headers.Location))
+                    throw new Exception("Expected HTTP redirect to `/sms3/forms/admineditmyaccount.aspx`.");
             }
         }
 
