@@ -1,7 +1,4 @@
-﻿#r "Shared\Ase.Shared.dll"
-#r "System.Configuration"
-
-using Ase.Shared;
+﻿using Ase.Shared;
 using Ase.Shared.AzureStorage;
 using Ase.Shared.AdoptionList;
 using Ase.Shared.PetPoint;

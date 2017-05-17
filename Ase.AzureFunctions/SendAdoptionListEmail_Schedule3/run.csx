@@ -1,4 +1,7 @@
-﻿#load "..\SendAdoptionListEmail.csx"
+﻿#r "..\Shared\Ase.Shared.dll"
+#r "System.Configuration"
+
+#load "..\SendAdoptionListEmail.csx"
 
 using System;
 
