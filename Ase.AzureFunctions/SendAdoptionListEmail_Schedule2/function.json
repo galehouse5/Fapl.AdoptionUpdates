@@ -5,7 +5,7 @@
       "name": "myTimer",
       "type": "timerTrigger",
       "direction": "in",
-      "schedule": "0 30 19 * * 2,4" // Tue, Thu 7:30 PM
+      "schedule": "0 30 19 * * 2,4"
     }
   ]
 }
