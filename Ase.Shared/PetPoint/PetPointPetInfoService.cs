@@ -22,7 +22,7 @@ namespace Ase.Shared.PetPoint
             };
             client = new HttpClient(handler)
             {
-                BaseAddress = new Uri("http://sms.petpoint.com/sms3/")
+                BaseAddress = new Uri("https://sms.petpoint.com/sms3/")
             };
         }
 
