@@ -4,6 +4,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Ase.AzureFunctions
@@ -17,6 +18,8 @@ namespace Ase.AzureFunctions
         [FunctionName("StorePetIDMappings")]
         public static async Task Run([TimerTrigger("0 0 */1 * * *")]TimerInfo myTimer, TraceWriter log)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (var retrievalService = new PetfinderPetIDMappingRetrievalService(PetfinderApiKey, PetfinderShelterID))
             {
                 var storageService = new AzureTableStoragePetIDMappingStorageService(PetfinderShelterID, AzureStorageConnectionString, "PetIDMappings");
