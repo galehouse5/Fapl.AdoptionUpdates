@@ -7,15 +7,11 @@ namespace Fapl.AdoptionUpdates.Shared.Petfinder
 {
     public class PetfinderPetImageRetrievalService : IPetImageRetrievalService, IDisposable
     {
-        private HttpClientHandler handler;
+        private HttpClientHandler handler = new HttpClientHandler();
         private HttpClient client;
 
         public PetfinderPetImageRetrievalService()
         {
-            handler = new HttpClientHandler
-            {
-                AllowAutoRedirect = false
-            };
             client = new HttpClient(handler)
             {
                 BaseAddress = new Uri("http://photos.petfinder.com/photos/pets/")
